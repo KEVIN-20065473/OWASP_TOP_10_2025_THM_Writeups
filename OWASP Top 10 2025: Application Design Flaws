@@ -1,0 +1,102 @@
+Application Design Flaws
+Introduction
+
+These are design-level failures:
+
+Misconfigurations
+Supply chain issues
+Cryptography mistakes
+Insecure architecture
+AS02: Security Misconfigurations
+The Concept
+
+Errors in setup:
+
+Default credentials
+Exposed services
+Debug errors
+The Challenge
+
+API endpoint:
+/api/user/<user_id>
+
+Valid input works.
+
+Invalid input:
+/api/user/adasdjbkadaj
+
+Returns:
+
+File path
+Stack trace
+Internal variables
+Flag
+Flag
+
+THM{V3RB0S3_3RR0R_L34K}
+
+Key Takeaway
+
+Never expose debug info in production.
+
+AS03: Software Supply Chain Failures
+Concept
+
+Using compromised or outdated dependencies.
+
+Example: SolarWinds attack.
+
+The Challenge
+
+Old vulnerable library exposed data.
+
+Flag
+
+THM{SUPPLY_CH41N_VULN3R4B1L1TY}
+
+Key Takeaway
+Verify dependencies
+Monitor vulnerabilities
+AS04: Cryptographic Failures
+The Challenge
+
+Encrypted document shown.
+
+JS file reveals:
+
+SECRET_KEY = "my-secret-key-16"
+MODE = ECB
+
+Decryption reveals flag.
+
+Flag
+
+THM{CRYPTO_FAILURE_H4RDCOD3D_K3Y}
+
+Key Takeaway
+
+Never hardcode keys.
+
+AS06: Insecure Design
+The Challenge
+
+API assumes mobile-only access.
+
+Direct API calls:
+
+/api/users → all users
+/api/messages/admin → admin messages
+Flag
+
+THM{1NS3CUR3_D35IGN_4SSUMPT10N}
+
+Key Takeaway
+
+Never rely on assumptions for security.
+
+Summary
+Category	Fix
+Misconfig	Harden setup
+Supply Chain	Verify dependencies
+Crypto	Secure key management
+Design	Threat modeling
